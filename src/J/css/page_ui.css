@@ -1,0 +1,26 @@
+/*container pages*/
+div.related ul {
+    border-bottom: 1px dotted #CCCCCC;
+    height: 2em;
+    list-style: none outside none;
+    padding: 0;
+}
+div.related ul li {
+    float: left;
+    height: 2em;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+div.related li {
+    display: inline;
+}
+div.related ul li a {
+    color: #80C269;
+    line-height: 1.75em;
+    margin: 0;
+    padding: 0 5px;
+}
+div.related ul li a:hover{
+	color:#f60;
+}

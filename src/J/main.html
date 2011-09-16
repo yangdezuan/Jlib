@@ -1,0 +1,226 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>jackyang Demo --frame dialog</title>
+<link rel="stylesheet" href="css/frame_ui.css" />
+<script src="js/jy.js"></script>
+</head>
+<style>
+.lnkshow{
+	background:#F00;
+	color:#fff;
+	display:inline-block;
+	padding:5px;
+}
+.text{
+	display:none;
+}
+</style>
+<body>
+<script>
+</script>
+<div id="page">
+    <div id="header">
+        <h1>小巧灵活、简洁实用、愉悦编码、快乐开发</h1>
+    </div>
+    <div id="content">	
+    		<div class="itemSection">		
+				<h2>JavaScript语言规范</h2>	
+					声明变量时, 必须加上 var 关键字.<br>
+    				尽量减少全局变量的使用.<br>
+    				语句总是以分号结尾.<br>
+    				不要在块内声明函数.<br>
+    				标准特性优于非标准特性(如果类库有提供, 优先使用类库中的函数).<br>
+    				不要封装基本类型.<br>
+    				只在解析序列化串时使用 eval() .<br>
+    				禁止使用 with .<br>
+    				减少使用 continue 和 break .<br>
+    				仅在函数内使用 this .<br>
+    				使用 Array/Object 直接量, 避免使用 Array/Object 构造器.<br>
+    				禁止修改内置对象的原型.
+   				</p>
+    		<div class="itemSection">
+				<h2>文件与目录命名约定</h2>
+    				一律小写, 必须是英文单词或产品名称的拼音, 多个单词用连字符(-)连接. 只能出现英文字母、数字和连字符, 严禁出现中文.<br>
+    				出现版本号时, 需要用字母 v 做为前缀, 小版本号用点号(.)隔开, 比如 global-v8.js 或 detail-v2.2.js .<br>
+    				该命名规范适用于 html, css, js, swf, php, xml, png, gif, jpg, ico 等前端维护的所有文件类型和相关目录.<br>
+    				js 和 css 压缩文件, 统一以 -min 结尾, 比如源码文件为 kissy.js, 压缩后为 kissy-min.js .<br>
+    				文件编码约定<br>
+    				由于历史原因, 前端开发涉及的所有文本文件请统一 采用 GB2312, GBK 或 GB18030 编码 .<br>
+    				注意：后台采用 UTF-8 的新项目, 或自主开发的项目, 推荐使用 UTF-8 编码.<br>
+    				id 和 class 命名约定<br>
+    				id 和 class 的命名总规则为： 内容优先,表现为辅. 首先根据内容来命名, 比如 main-nav. 如果根据内容找不到合适的命名, 可以再结合表现来定, 比如 skin-blue, present-tab, col-main.<br>
+    				id 和 class 名称一律小写, 多个单词用连字符连接, 比如 recommend-presents.<br>
+    				id 和 class 名称中只能出现小写的 26 个英文字母、数字和连字符(-), 任何其它字符都严禁出现.<br>
+    				id 和 class 尽量用英文单词命名 . 确实找不到合适的单词时, 可以考虑使用产品的中文拼音, 比如 wangwang, dating. 对于中国以及淘宝特色词汇, 也可以使用拼音, 比如 xiaobao, daigou. 除了产品名称和特色词汇, 其它任何情况下都严禁使用拼音.<br>
+    				在不影响语义的情况下, id 和 class 名称中可以适当采用英文单词缩写, 比如 col, nav, hd, bd, ft 等, 但切忌自造缩写.<br>
+    				id 和 class 名称中的第一个词必须是单词全拼或语义非常清晰的单词缩写, 比如 present, col.<br>
+    				仅在 JavaScript 代码中当作 hook 用的 id 或 class, 命名规则为 J_UpperCamelCase``(请注意, ``J_ 后的首字母也大写！), 其中字母 J 代表 JavaScript, 也是钩子(hook)的象形. 注意：如果在 JavaScript 和 CSS 中都需要用到, 则不用遵守本约定.<br>
+    				在自动化测试脚本中当作 hook 用的 class, 命名规则为 T_UpperCamelCase, 其中字母 T 代表 Test.</p>
+    		<div class="itemSection">	<h2>JavaScript编码风格</h2>
+				<h3>行与缩进</h3>
+    				<h4>语句行</h4>
+    				尽可能不要让每行超过 120 个字符;<br>
+    				语句必须以分号作为结束符, 不要忽略分号;<br>
+    				<h4>空格</h4>
+   				<ol class="listOL">
+    						<li>数值操作符(如, +/-/*/% 等)两边留空;</li>
+    						<li>赋值操作符/等价判断符两边留一空格;</li>
+    						<li>for 循环条件中, 分号后留一空格;</li>
+    						<li>变量声明语句, 数组值, 对象值及函数参数值中的逗号后留一空格;</li>
+    						<li>空行不要有空格;</li>
+    						<li>行尾不要有空格;</li>
+    						<li>逗号和冒号后一定要跟空格;</li>
+    						<li>点号前后不要出现空格;</li>
+    						<li>空对象和数组不需要填入空格;</li>
+    						<li>函数名末尾和左括号之间不要出现空格;</li>
+				</ol>
+    				<br>
+   				<h4>空行</h4>
+    				<ol class="listOL">
+    						<li>逻辑上独立的代码块使用空行分隔;</li>
+    						<li>文件末尾留 1~2 个空行;</li>
+    						<li>不要吝啬空行. 尽量使用空行将逻辑相关的代码块分割开, 以提高程序的可读性.</li>
+				</ol>
+    			<h4>缩进</h4>
+    				<ol class="listOL">
+    						<li>
+    								<p>以 4 个空格为一缩进层次;</p>
+							</li>
+    						<li>
+    								<p>变量声明:</p>
+    								<blockquote>
+    										<div>
+    												<ul>
+    														<li>多个变量声明时, 适当换行表示;</li>
+    														<li>参照 var 关键字, 缩进一层次;</li>
+													</ul>
+											</div>
+									</blockquote>
+							</li>
+    						<li>
+    								<p>函数参数:</p>
+    								<blockquote>
+    										<div>
+    												<ul>
+    														<li>函数参数写在同一行上;</li>
+    														<li>传递匿名函数时, 函数体应从调用该函数的左边开始缩进;</li>
+													</ul>
+											</div>
+									</blockquote>
+							</li>
+    						<li>
+    								<p>数组和对象初始化时:</p>
+    								<blockquote>
+    										<div>
+    												<ul>
+    														<li>如果初始值不是很长, 尽量保持写在单行上;</li>
+    														<li>初始值占用多行时, 缩进一层次;</li>
+    														<li>对象中, 比较长的变量/数值, 不要以冒号对齐;</li>
+													</ul>
+											</div>
+									</blockquote>
+							</li>
+    						<li>
+    								<p>二元/三元操作符:</p>
+    								<blockquote>
+    										<div>
+    												<ul>
+    														<li>操作符始终跟随前行;</li>
+    														<li>实在需要缩进时, 按照上述缩进风格;</li>
+													</ul>
+											</div>
+									</blockquote>
+							</li>
+    						<li>
+    								<p>表达式中的缩进同变量声明时;</p>
+							</li>
+				</ol>
+    				<h4><br>
+    				</h4><h3>括号</h3>
+    				原则: 不要滥用括号, 必要时一定要使用.<br>
+    				if/else/while/for 条件表达式必须有小括号;<br>
+    				语句块必须有大括号;<br>
+    				一元操作符(如 delete, typeof, void)或在某些关键词(如 return, throw, case, new) 之后, 不要使用括号;<br>
+    				<h3>变量</h3>
+    				变量如有较广的作用域, 使用全局变量; 如果是在类中, 可以设计成为一个类的成员;<br>
+    				函数体中, 多个局部变量集中在一起声明, 避免分散;<br>
+    				适当延迟变量的初始化;<br>
+    				<h3>字符串</h3>
+    				JS 代码中, 单行字符串使用单引号;<br>
+    				JS 代码中, 多行字符串使用 + 拼接形式, 不要使用 \ 拼接;<br>
+    				HTML 中 Element 属性, 使用双引号;<br>
+   				<h3>命名规范</h3>
+   				<p>原则：  * 尽量避免潜在冲突;  * 精简短小, 见名知意;</p>
+					<ol class="listOL">
+							<li>
+									<p>普通变量统一使用驼峰形式;</p>
+							</li>
+							<li>
+									<p>常量使用全部大写, 多个单词以下划线分隔;</p>
+							</li>
+							<li>
+									<p>枚举量, 同常量;</p>
+							</li>
+							<li>
+									<p>私有变量, 属性和方法, 名字以下划线开头;</p>
+							</li>
+							<li>
+									<p>保护变量, 属性和方法, 名字同普通变量名;</p>
+							</li>
+							<li>
+									<p>方法和函数的可选参数, 名字以 opt_ 开头, 使用 @param 标记说明;</p>
+							</li>
+							<li>
+									<dl>
+											<dt>方法和函数的参数个数不固定时:</dt>
+											<dd>
+													<ul>
+															<li>可添加参数 var_args 为参数个数;</li>
+															<li>取代使用 arguments;</li>
+															<li>使用 @param 标记说明;</li>
+													</ul>
+											</dd>
+									</dl>
+							</li>
+							<li>
+									<dl>
+											<dt>Getter/Setter 命名:</dt>
+											<dd>
+													<ul>
+															<li>以 getFoo/setFoo(value) 形式;</li>
+															<li>布尔类型使用 isFoo()/hasFoo()/canDo()/shouldDO() 也可;</li>
+													</ul>
+											</dd>
+									</dl>
+							</li>
+							<li>
+									<dl>
+											<dt>命名空间:</dt>
+											<dd>
+													<ul>
+															<li>为全局代码使用命名空间, 如 sloth.*;</li>
+															<li>外部代码和内部代码使用不同的命名空间;</li>
+													</ul>
+											</dd>
+									</dl>
+							</li>
+							<li>
+									<p>重命名那些名字很长的变量, 不要在全局范围内创建别名, 而仅在函数块作用域中使用;</p>
+							</li>
+							<li>
+									<p>文件名应全部使用小写字符, 且不包含除 - 和 _ 外的标点符号;</p>
+							</li>
+							<li>
+									<p>临时的重复变量建议以 i, j, k, ..., 命名;</p>
+							</li>
+					</ol>
+    </div>
+    <div id="footer">
+        &copy; Designed by jackyang 
+    </div>
+</div>
+
+</body>
+</html>

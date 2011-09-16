@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>速查表</title>
+<link href="css/frame_ui.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery-1.6.2.js"></script>
+<script>
+$(function(){
+	var J_frameLeftTree = $('#J_frameLeftTree');
+	$('ul', J_frameLeftTree).each(function(i){
+		var self = $(this);
+		if(i > 0){
+			self.hide();
+		}
+		if(self.parent().next().text()){
+			self.addClass('current');			
+		}
+	});
+	$('li', J_frameLeftTree).each(function(i){
+		var self = $(this);
+		if(!self.next().is('li')){
+			self.find('.plus_middle').addClass('plus_bottom');
+			self.find('.elbow_middle').addClass('elbow_bottom');		
+		}else{
+			self.find('.plus_middle').removeClass('plus_bottom');
+			self.find('.elbow_middle').removeClass('elbow_bottom');		
+		}
+	});
+	
+	$('div.title', J_frameLeftTree).click(function(e){
+		e.stopPropagation();
+		var self = $(this);
+		self.next().toggle();
+		self.find('.plus_middle').toggleClass('minus_middle');
+		self.find('.folder_close').toggleClass('folder_open');		
+		self.find('.plus_bottom').toggleClass('minus_bottom');
+	});
+	//$('div.title:eq(0)', J_frameLeftTree).trigger('click')
+})
+</script>
+</head>
+
+<body class="leftFrame-bg">
+	<h2 class="title-bar"><img src="images/tree/help.png" /> <strong>速查表</strong></h2>
+	<div class="frame-leftTree" id="J_frameLeftTree">
+		<ul>
+			<li>
+				<div class="title">
+					<div class="plus_middle"></div>
+					<div class="folder_close"></div>
+					<div>核心</div>
+				</div>
+				<ul class="content">
+					<li>
+						<div class="title">
+							<div class="plus_middle"></div>
+							<div class="folder_close"></div>
+							<div>核心函数</div>
+						</div>
+						<ul class="content">
+							<li class="title">
+								<div class="elbow_middle"></div>
+								<div class="page"></div>
+								<div><a href="j-core/j-function/j-expression.html" target="main">J(expression)</a></div>
+							</li>
+							<li class="title">
+								<div class="elbow_middle"></div>
+								<div class="page"></div>
+								<div><a href="frame.html" target="main">J(html)</a></div>
+							</li>																				
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<div class="title">
+					<div class="plus_middle"></div>
+					<div class="folder_close"></div>
+					<div>节点操作</div>
+				</div>
+				<ul class="content">
+					<li>
+						<div class="title">
+							<div class="plus_middle"></div>
+							<div class="folder_close"></div>
+							<div>查找</div>
+						</div>
+						<ul class="content">
+							<li>
+								<div class="title">
+									<div class="plus_middle"></div>
+									<div class="folder_close"></div>
+									<div>框架特性</div>
+								</div>
+								<ul class="content">
+									<li class="title">
+										<div class="elbow_middle"></div>
+										<div class="page"></div>
+										<div><a href="frame.html" target="main">1</a></div>
+									</li>
+									<li class="title">
+										<div class="elbow_middle"></div>
+										<div class="page"></div>
+										<div><a href="frame.html" target="main">2</a></div>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<div class="title">
+									<div class="plus_middle"></div>
+									<div class="folder_close"></div>
+									<div>框架特性</div>
+								</div>
+								<ul class="content">
+									<li class="title">
+										<div class="elbow_middle"></div>
+										<div class="page"></div>
+										<div><a href="frame.html" target="main">3</a></div>
+									</li>
+									<li class="title">
+										<div class="elbow_middle"></div>
+										<div class="page"></div>
+										<div><a href="frame.html" target="main">4</a></div>
+									</li>
+								</ul>
+							</li>														
+						</ul>
+					</li>
+					
+				</ul>
+			</li>
+
+		</ul>
+	</div>
+</body>
+</html>
+<frame src="left.html" scrolling="auto" scrolling="no" noresize=true noresize="noresize" >

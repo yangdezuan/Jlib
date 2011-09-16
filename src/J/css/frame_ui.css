@@ -1,0 +1,244 @@
+/*global*/
+body {
+	font:14px/1 Tahoma, Geneva, sans-serif;
+	color:#666;
+	background:#fff;
+	margin:0;
+	padding:0;
+}
+div, form, img, ul, ol, li, dl, dt, dd, p {
+	margin:0;
+	padding:0;
+	border:0;
+}
+h1, h2, h3, h4, h5, h6, h7 {
+	margin:0;
+	padding:0;
+}
+/*li {
+	list-style-type:none;
+}*/
+img, input {
+	vertical-align:middle;
+}
+.fl {
+	float:left;
+}
+.fr {
+	float:right;
+}
+.clearfix:after {
+	content:".";
+	visibility:hidden;
+	display:block;
+	clear:both;
+	height:0;
+}
+.clearfix {
+	display:inline-block;
+}
+* html .clearfix {
+	height:1%;
+}
+.cfix {
+	display:block;
+}
+.m5 {
+	margin:5px 0;
+}
+.area {
+	margin:0 auto;
+	width:95%;
+	clear:both;
+}
+a {
+	color:#00A0E9;
+	text-decoration:none;
+}
+a:hover {
+	color:#f60;
+	text-decoration:underline;
+}
+.font_14 {
+	font-size:14px;
+}
+.line24 {
+	line-height:24px;
+}
+.f_12 {
+	font:12px/1.5 Arial;
+}
+.f_14 {
+	font:14px/1.5 Arial;
+}
+.f_16 {
+	font:16px/1.5 Arial;
+}
+.f_18 {
+	font:18px/1.5 Arial;
+}
+/*frame header*/
+.frame-header {
+	height:30px;
+	padding:0px 0 0px 0;
+	background:url(../images/bg-header.png) repeat-x;
+	border-bottom:1px solid #aaccee;
+	overflow:hidden;
+}
+.frame-header-left {
+	float:left;
+}
+.frame-header-right {
+	float:right;
+	padding:8px 5px 0;
+}
+.frame-header-right .saying {
+	font-size:12px;
+	color:#666;
+}
+.leftFrame-bg {
+	background:#F2F8FA;
+}
+.leftFrame-bg .title-bar{
+	font-size:16px;
+	line-height:1.5;
+	padding:5px 0 5px 18px;
+}
+.leftFrame-bg .title-bar strong{
+	vertical-align:middle;
+}
+.frame-leftTree {
+	padding:0px;
+	margin:0px;
+}
+.frame-leftTree img {
+	vertical-align:middle;
+}
+.frame-leftTree ul {
+	padding:0px;
+	margin:0px;
+}
+.frame-leftTree li {
+	padding:0px;
+	list-style-type:none;
+	margin-left:18px;
+	clear:both;
+}
+.frame-leftTree div {
+	vertical-align:middle;
+}
+.frame-leftTree .title{
+	cursor:pointer;
+}
+.frame-leftTree .title div {
+	vertical-align:middle;
+	line-height:18px;
+	float:left;
+}
+.frame-leftTree .content:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+.frame-leftTree .content {
+	*zoom:1;	
+}
+.frame-leftTree .content.current{
+	 background: url(../images/tree/line_connect.gif) repeat-y;
+}
+.frame-leftTree .icon {
+	width:18px;
+	height:18px;
+}
+.frame-leftTree .folder_close {
+	background:url(../images/tree/folder_close.png) no-repeat 0 0;
+	width:18px;
+	height:18px;
+}
+.frame-leftTree .folder_open {
+	background:url(../images/tree/folder_open.png) no-repeat 0 0;
+	width:18px;
+	height:18px;
+}
+.frame-leftTree .plus_top {
+	background:url(../images/tree/plus_top.gif) no-repeat 0 0;
+	width:18px;
+	height:18px;
+}
+.frame-leftTree .minus_top {
+	background:url(../images/tree/minus_top.gif) no-repeat 0 0;
+	width:18px;
+	height:18px;
+}
+.frame-leftTree .plus_middle {
+	background:url(../images/tree/plus_middle.gif) no-repeat 0 0;
+	width:18px;
+	height:18px;
+}
+.frame-leftTree .plus_bottom {
+	background:url(../images/tree/plus_bottom.gif) no-repeat 0 0;
+	width:18px;
+	height:18px;
+}
+.frame-leftTree .minus_middle {
+	background:url(../images/tree/minus_middle.gif) no-repeat 0 0;
+	width:18px;
+	height:18px;
+}
+.frame-leftTree .minus_bottom {
+	background:url(../images/tree/minus_bottom.gif) no-repeat 0 0;
+	width:18px;
+	height:18px;
+}
+.frame-leftTree .line_connect {
+	background:url(../images/tree/line_connect.gif) no-repeat 0 0;
+	width:18px;
+	height:18px;
+}
+.frame-leftTree .elbow_middle {
+	background:url(../images/tree/elbow_middle.gif) no-repeat 0 0;
+	width:18px;
+	height:18px;
+}
+.frame-leftTree .elbow_bottom {
+	background:url(../images/tree/elbow_bottom.gif) no-repeat 0 0;
+	width:18px;
+	height:18px;
+}
+.frame-leftTree .page {
+	background:url(../images/tree/page.gif) no-repeat 0 0;
+	width:18px;
+	height:18px;
+}
+.frame-leftTree .empty {
+	background:url(../images/tree/empty.gif) no-repeat 0 0;
+	width:18px;
+	height:18px;
+}
+/*frame content */
+#header{
+	text-align:center;
+}
+#footer{
+	text-align:right;
+}
+pre {
+    background:#F8F8F6;
+    border: 1px solid #D1D1D1;
+    border-radius: 2px 2px 2px 2px;
+    font: 14px/1.5 'Consolas','Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace;
+    padding: 10px;
+}
+/*container*/
+#page{
+	padding:15px;
+	line-height:1.5;
+}
+#content .itemSection{
+	padding:25px 0;
+}
+.listOL{
+	padding:0 0 0 25px;
+}
