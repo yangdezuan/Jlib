@@ -11,7 +11,10 @@ var J = (function(ns){
 	quickExpr = /^(?:[^<]*(<[\w\W]+>)[^>]*$|#([\w\-]+)$)/,
 	rinlineJ = / J\d+="(?:\d+|null)"/g,
 	rxhtmlTag = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/ig,
-	rootJ;
+	toString = Object.prototype.toString,
+	rootJ,
+	// [[Class]] -> type pairs
+	class2type = {};
 	J.fn = J.prototype = {
 		config: {
 			ns: ns
@@ -160,7 +163,57 @@ var J = (function(ns){
 		
 	};
 	J.fn.init.prototype = J.fn;
-	//rootJ = J(document);
+	J.extend = J.fn.extend = function() {
+		var options, name, src, copy, copyIsArray, clone,
+			target = arguments[0] || {},
+			i = 1,
+			length = arguments.length,
+			deep = false;
+		// extend J itself if only one argument is passed
+		if ( length === i ) {
+			target = this;
+			--i;
+		}
+	
+		for ( ; i < length; i++ ) {
+			// Only deal with non-null/undefined values
+			if ( (options = arguments[ i ]) != null ) {
+				// Extend the base object
+				for ( name in options ) {
+					src = target[ name ];
+					copy = options[ name ];
+					target[ name ] = copy;
+				}
+			}
+		}
+	
+		// Return the modified object
+		return target;
+	};
+	J.extend({
+		isFunction: function( obj ) {
+			return J.type(obj) === "function";
+		},
+		isArray: Array.isArray || function( obj ) {
+			return J.type(obj) === "array";
+		},
+		type: function( obj ) {
+			return obj == null ?
+				String( obj ) :
+				class2type[ toString.call(obj) ] || "object";
+		},
+		// args is for internal usage only
+		each: function( object, callback, args ) {
+			var name, i = 0,
+				length = object.length,
+				isObj = length === undefined || J.isFunction( object );			
+			return object;
+		}
+	});
+	// Populate the class2type map
+	J.each("Boolean Number String Function Array Date RegExp Object".split(" "), function(i, name) {
+		class2type[ "[object " + name + "]" ] = name.toLowerCase();
+	});
 	//return golbal
 	return (_WIN[ns] = window.$ = J);
 })("Jack");
