@@ -1,3 +1,8 @@
+h1, h2, h3 {
+    font-family: tahoma,"Microsoft YaHei",sans-serif;
+    font-size: 18px;
+    padding: 8px 0;
+}
 /*container pages*/
 div.related ul {
     border-bottom: 1px dotted #CCCCCC;
@@ -23,4 +28,27 @@ div.related ul li a {
 }
 div.related ul li a:hover{
 	color:#f60;
+}
+div.section{
+	padding:5px 0;
+}
+#module{
+	margin:5px 0 0;
+}
+.example{
+	padding:5px 0 0;
+}
+#module .desc table{
+	border-collapse:collapse;
+	width:100%;
+}
+#module .desc table th{	
+	padding:5px;	
+	border:1px solid #ccc;
+	background:#ddd;
+}
+#module .desc table td{
+	padding:5px;	
+	border:1px solid #ccc;
+	background:#fff;
 }
