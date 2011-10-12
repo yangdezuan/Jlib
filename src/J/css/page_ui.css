@@ -21,8 +21,14 @@ div.related li {
     display: inline;
 }
 div.related ul li a {
-    color: #80C269;
-    line-height: 1.75em;
+    color: #80C269;   
+}
+div.related ul li span{
+	color:#999;
+}
+div.related ul li a,
+div.related ul li span{
+	line-height: 1.75em;
     margin: 0;
     padding: 0 5px;
 }

@@ -29,9 +29,9 @@ $(function(){
     <div class="related">
         <ul>
 			<li><a accesskey="U" href="../../main.html">Home</a> » </li>
-			<li><a accesskey="U" href="index.html">核心</a> » </li>
-			<li><a accesskey="U" href="index.html">核心函数</a> » </li>
-			<li><a accesskey="U" href="index.html">J(selector)</a></li>
+			<li><span>核心</span> » </li>
+			<li><span>核心函数</span> » </li>
+			<li><span>J(selector)</span></li>
 		</ul>
     </div>
     <div id="content">
