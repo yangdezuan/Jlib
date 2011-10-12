@@ -31,7 +31,7 @@ $(function(){
 			<li><a accesskey="U" href="../../main.html">Home</a> » </li>
 			<li><a accesskey="U" href="index.html">核心</a> » </li>
 			<li><a accesskey="U" href="index.html">核心函数</a> » </li>
-			<li><a accesskey="U" href="index.html">J(expression)</a></li>
+			<li><a accesskey="U" href="index.html">J()</a></li>
 		</ul>
     </div>
     <div id="content">
