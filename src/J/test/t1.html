@@ -1,0 +1,25 @@
+<div id="jack">loading</div>
+<script>
+(function( window, undefined ) {
+	var J = (function(ns){
+		var J = function(selector){
+			return new J.prototype.init(selector); // 返回创建一个对象,让此对象具有 相对应的方法和属性;
+		};
+		J.prototype = {
+			init: function(selector){
+				var quickExpr = /^(?:[^<]*(<[\w\W]+>)[^>]*$|#([\w\-]+)$)/,
+				match = quickExpr.exec( selector ),
+				elem = document.getElementById( match[2] );
+				this[0] = elem;
+				return this; //返回dom 对象
+			},
+			html: function(value){
+				return this[0].innerHTML = value;	
+			}
+		}
+		J.prototype.init.prototype = J.prototype; // 将已有对象的属性和方法赋值给 DOM对象
+		return window[ns] = window.$ = J; // 这个比较好理解，把J的对象赋值给全局$ 
+	})("Jack");// 这里的jack可以自定义,方向区别$
+})(window);
+Jack("#jack").html("test");
+</script>

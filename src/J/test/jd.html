@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="../css/frame_ui.css" rel="stylesheet" type="text/css"/>
+<style type="text/css" >
+</style>
+<script src="../js/jy.js"></script>
+</head>
+<body>
+<script>
+
+
+</script>
+<dl id="id">
+	<dt>
+		The current is Title
+	</dt>
+	<dd>
+		your content
+	</dd>
+	<dd class="cls">
+		J is a fast and concise JavaScript Library<br/>
+	that simplifies HTML document traversing,<br/>
+	  event handling, animating, <br/>
+	 and Ajax interactions for rapid web development.<br/>
+	 J is designed to change the way that you write JavaScript. <br/>
+	 </dd>
+</dl>
+<script>
+$(function(){
+	$("dt").css("font-size:26px");	
+	$("#id").css("border:1px solid #000");
+	$("dd").html("change the html content").css({background:'#ccc',fontWeight:'bold', color:'#f30', padding:'15px'});
+	$(".cls").css({padding:'15px'}).html('change content for className tag');	
+});
+
+</script>
+</body>
+</html>
+
