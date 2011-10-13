@@ -31,8 +31,23 @@ var J = (function(ns){
 				this.length = 1;
 				return this;
 			}
+			// The body element only exists once, optimize finding it
+			if ( selector === "body" && !context && document.body ) {
+				this.context = document;
+				this[0] = document.body;
+				this.selector = selector;
+				this.length = 1;
+				return this;
+			}
 			if ( typeof selector === "string" ) {
-				match = quickExpr.exec( selector );
+				// Are we dealing with HTML string or an ID?
+				if ( selector.charAt(0) === "<" && selector.charAt( selector.length - 1 ) === ">" && selector.length >= 3 ) {
+					// Assume that strings that start and end with <> are HTML and skip the regex check
+					match = [ null, selector, null ];
+	
+				} else {
+					match = quickExpr.exec( selector );
+				}
 				// Verify a match, and that no context was specified for #id
 				if ( match && (match[1] || !context) ) {
 					elem = document.getElementById( match[2] );
@@ -48,6 +63,20 @@ var J = (function(ns){
 					this.context = document;
 					this.selector = selector;
 					return this;
+				} else if ( !context || context.J ) {
+					// if the selector is tagName
+					elem = document.getElementsByTagName(selector);
+					this.length = 1;
+					this[0] = elem[0];
+					this.context = document;
+					this.selector = selector;
+					return this;
+					//return (context || rootJ).find( selector );
+	
+				// HANDLE: $(expr, context)
+				// (which is just equivalent to: $(context).find(expr)
+				} else {
+					return this.constructor( context ).find( selector );
 				} 
 			} else if ( this.isFun( selector ) ) {						
 				return this.ready( selector );
@@ -111,16 +140,43 @@ var J = (function(ns){
 			}
 			return ready;
 		}(),		
-		html: function(value){			
+		html: function(value){
 			if ( value === undefined ) {
 				return this[0] && this[0].nodeType === 1 ?
 					this[0].innerHTML.replace(rinlineJ, "") :
 					null;
 			}else if( typeof value === "string"){
 				value = value.replace(rxhtmlTag, "<$1></$2>");
-				return this[0].innerHTML = value;
-			}
+				this[0].innerHTML = value;
+			}			
 			return this;
+		},
+		// Take an array of elements and push it onto the stack
+		// (returning the new matched element set)
+		pushStack: function( elems, name, selector ) {
+			// Build a new J matched element set
+			var ret = this.constructor();
+		
+			if ( J.isArray( elems ) ) {
+				push.apply( ret, elems );
+		
+			} else {
+				J.merge( ret, elems );
+			}
+		
+			// Add the old object onto the stack (as a reference)
+			ret.prevObject = this;
+		
+			ret.context = this.context;
+		
+			if ( name === "find" ) {
+				ret.selector = this.selector + (this.selector ? " " : "") + selector;
+			} else if ( name ) {
+				ret.selector = this.selector + "." + name + "(" + selector + ")";
+			}
+		
+			// Return the newly-formed element set
+			return ret;
 		},
 		append : function (tag, idx){
 			var obj,that = this[0];
@@ -208,15 +264,186 @@ var J = (function(ns){
 				length = object.length,
 				isObj = length === undefined || J.isFunction( object );			
 			return object;
+		},
+		merge: function( first, second ) {
+			var i = first.length,
+				j = 0;
+	
+			if ( typeof second.length === "number" ) {
+				for ( var l = second.length; j < l; j++ ) {
+					first[ i++ ] = second[ j ];
+				}
+	
+			} else {
+				while ( second[j] !== undefined ) {
+					first[ i++ ] = second[ j++ ];
+				}
+			}
+	
+			first.length = i;
+	
+			return first;
+		},
+		find: function(expr, context, isXML){
+			var set,
+				that = this,
+				order = [ "ID", "NAME", "TAG" ],
+
+				match = {
+					ID: /#((?:[\w\u00c0-\uFFFF\-]|\\.)+)/,
+					CLASS: /\.((?:[\w\u00c0-\uFFFF\-]|\\.)+)/,
+					NAME: /\[name=['"]*((?:[\w\u00c0-\uFFFF\-]|\\.)+)['"]*\]/,
+					ATTR: /\[\s*((?:[\w\u00c0-\uFFFF\-]|\\.)+)\s*(?:(\S?=)\s*(?:(['"])(.*?)\3|(#?(?:[\w\u00c0-\uFFFF\-]|\\.)*)|)|)\s*\]/,
+					TAG: /^((?:[\w\u00c0-\uFFFF\*\-]|\\.)+)/,
+					CHILD: /:(only|nth|last|first)-child(?:\(\s*(even|odd|(?:[+\-]?\d+|(?:[+\-]?\d*)?n\s*(?:[+\-]\s*\d+)?))\s*\))?/,
+					POS: /:(nth|eq|gt|lt|first|last|even|odd)(?:\((\d*)\))?(?=[^\-]|$)/,
+					PSEUDO: /:((?:[\w\u00c0-\uFFFF\-]|\\.)+)(?:\((['"]?)((?:\([^\)]+\)|[^\(\)]*)+)\2\))?/
+				};
+					
+			if ( !expr ) {
+				return [];
+			}
+			if(match.CLASS.test(expr)){
+			// if the selector is tagName
+				/*if(document.all){
+					var children = context.all;
+				}else{
+					var children = context.getElementsByTagName('*');
+				}
+				alert(children.className)
+				//遍历子节点并检查className属性				
+				var elements = [];
+				for (var i = 0; i < children.length; i++) {
+					var child = children[i];
+					var classNames = child.className.split(' ');
+					for (var j = 0; j < classNames.length; j++) {
+						if (classNames[j] == className) {
+							elements[elements.length] = child;
+							break;
+						}
+					}
+				}*/	
+				var elem = document.get.getElementsByClassName(expr);			
+				this.length = 1;
+				this[0] = elem[0];
+				this.context = document;
+				this.selector = expr;
+				return this;		
+			}
+			
 		}
 	});
 	// Populate the class2type map
 	J.each("Boolean Number String Function Array Date RegExp Object".split(" "), function(i, name) {
 		class2type[ "[object " + name + "]" ] = name.toLowerCase();
 	});
+	rootJ = J(document);
 	//return golbal
 	return (_WIN[ns] = window.$ = J);
 })("Jack");
+
+
+//extend all
+J.fn.extend({
+	find: function( selector ) {
+		var self = this,
+			i, l;
+		if ( typeof selector !== "string" ) {
+			return J( selector ).filter(function() {
+				for ( i = 0, l = self.length; i < l; i++ ) {
+					if ( J.contains( self[ i ], this ) ) {
+						return true;
+					}
+				}
+			});
+		}
+
+		var ret = this.pushStack( "", "find", selector ),
+			length, n, r;
+		
+		for ( i = 0, l = this.length; i < l; i++ ) {
+			length = ret.length;
+			J.find( selector, this[i], ret );
+			
+			if ( i > 0 ) {
+				// Make sure that the results are unique
+				for ( n = length; n < ret.length; n++ ) {
+					for ( r = 0; r < length; r++ ) {
+						if ( ret[r] === ret[n] ) {
+							ret.splice(n--, 1);
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		return ret;
+	}
+});
+
+J.extend({
+	trim: function( obj ) {
+		// Check if a string has a non-whitespace character in it
+		var rnotwhite = /\S/,
+		// Used for trimming whitespace
+		trimLeft = /^\s+/,
+		trimRight = /\s+$/;
+		// IE doesn't match non-breaking spaces with \s but IE9 has support it
+		if ( rnotwhite.test( "\xA0" ) ) {
+			trimLeft = /^[\s\xA0]+/;
+			trimRight = /[\s\xA0]+$/;
+		}
+		obj = obj.toString().replace( trimLeft, "" ).replace( trimRight, "" );
+		return obj;
+	},
+	addpx: function(attr,val){
+        if(/width|height|left|top|right|bottom|margin|padding/.test(attr)&&/^[\-\d.]+$/.test(val)){//数值属性
+            return val+'px';//加px
+        }
+        return val;
+    },
+	rmvpx: function(attr,val){
+        if(/px$/.test(val))return parseFloat(val);//去除px
+        return val;
+    }
+});
+
+J.fn.css = function(name, value) {
+	// Setting 'undefined' is a no-op
+	if ( arguments.length === 2 && value === undefined ) {
+		return this;
+	}
+	var that = this[0];
+	if(typeof value!='undefined'){
+		name=name.replace(/-(\w)/g,function(_,$1){
+			return $1.toUpperCase();
+		});
+		that.style[name]=J.addpx(name,value);
+	}else if(typeof name=='object'){
+		for(var key in name){
+			this.css(key,name[key]);
+			//that.style[key]=J.addpx(key,name[key]);
+		}
+	}else{
+		if(name.indexOf(':')==-1){//无‘:’,比如'background:red'
+			name=name.replace(/-(\w)/g,function(_,$1){
+				return $1.toUpperCase();
+			});
+			return J.rmvpx(name,that.style&&that.style[name]||(that.currentStyle||_DOC.defaultView.getComputedStyle(that,null))[name]);
+		}else{
+			var cssObj=name.replace(/;$/,'').split(';'),
+				cssText;
+			for(var i=0,lg=cssObj.length;i<lg;i++){
+				cssText=cssObj[i].split(':');
+				this.css(cssText[0],cssText[1]);
+				//that.style[cssText[0]]=J.addpx(cssText[0],cssText[1]);
+			}
+		}
+	}
+	return this;
+};
+
 })(window);
 		
 		
