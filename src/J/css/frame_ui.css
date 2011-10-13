@@ -235,6 +235,7 @@ pre {
 #page{
 	padding:15px;
 	line-height:1.5;
+	margin:1px;
 }
 #content .itemSection{
 	padding:25px 0;

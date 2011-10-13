@@ -65,13 +65,13 @@ var J = (function(ns){
 					return this;
 				} else if ( !context || context.J ) {
 					// if the selector is tagName
-					elem = document.getElementsByTagName(selector);
+					/*elem = document.getElementsByTagName(selector);
 					this.length = 1;
 					this[0] = elem[0];
 					this.context = document;
 					this.selector = selector;
-					return this;
-					//return (context || rootJ).find( selector );
+					return this;*/
+					return (context || rootJ).find( selector );
 	
 				// HANDLE: $(expr, context)
 				// (which is just equivalent to: $(context).find(expr)
@@ -150,33 +150,6 @@ var J = (function(ns){
 				this[0].innerHTML = value;
 			}			
 			return this;
-		},
-		// Take an array of elements and push it onto the stack
-		// (returning the new matched element set)
-		pushStack: function( elems, name, selector ) {
-			// Build a new J matched element set
-			var ret = this.constructor();
-		
-			if ( J.isArray( elems ) ) {
-				push.apply( ret, elems );
-		
-			} else {
-				J.merge( ret, elems );
-			}
-		
-			// Add the old object onto the stack (as a reference)
-			ret.prevObject = this;
-		
-			ret.context = this.context;
-		
-			if ( name === "find" ) {
-				ret.selector = this.selector + (this.selector ? " " : "") + selector;
-			} else if ( name ) {
-				ret.selector = this.selector + "." + name + "(" + selector + ")";
-			}
-		
-			// Return the newly-formed element set
-			return ret;
 		},
 		append : function (tag, idx){
 			var obj,that = this[0];
@@ -264,74 +237,8 @@ var J = (function(ns){
 				length = object.length,
 				isObj = length === undefined || J.isFunction( object );			
 			return object;
-		},
-		merge: function( first, second ) {
-			var i = first.length,
-				j = 0;
-	
-			if ( typeof second.length === "number" ) {
-				for ( var l = second.length; j < l; j++ ) {
-					first[ i++ ] = second[ j ];
-				}
-	
-			} else {
-				while ( second[j] !== undefined ) {
-					first[ i++ ] = second[ j++ ];
-				}
-			}
-	
-			first.length = i;
-	
-			return first;
-		},
-		find: function(expr, context, isXML){
-			var set,
-				that = this,
-				order = [ "ID", "NAME", "TAG" ],
-
-				match = {
-					ID: /#((?:[\w\u00c0-\uFFFF\-]|\\.)+)/,
-					CLASS: /\.((?:[\w\u00c0-\uFFFF\-]|\\.)+)/,
-					NAME: /\[name=['"]*((?:[\w\u00c0-\uFFFF\-]|\\.)+)['"]*\]/,
-					ATTR: /\[\s*((?:[\w\u00c0-\uFFFF\-]|\\.)+)\s*(?:(\S?=)\s*(?:(['"])(.*?)\3|(#?(?:[\w\u00c0-\uFFFF\-]|\\.)*)|)|)\s*\]/,
-					TAG: /^((?:[\w\u00c0-\uFFFF\*\-]|\\.)+)/,
-					CHILD: /:(only|nth|last|first)-child(?:\(\s*(even|odd|(?:[+\-]?\d+|(?:[+\-]?\d*)?n\s*(?:[+\-]\s*\d+)?))\s*\))?/,
-					POS: /:(nth|eq|gt|lt|first|last|even|odd)(?:\((\d*)\))?(?=[^\-]|$)/,
-					PSEUDO: /:((?:[\w\u00c0-\uFFFF\-]|\\.)+)(?:\((['"]?)((?:\([^\)]+\)|[^\(\)]*)+)\2\))?/
-				};
-					
-			if ( !expr ) {
-				return [];
-			}
-			if(match.CLASS.test(expr)){
-			// if the selector is tagName
-				/*if(document.all){
-					var children = context.all;
-				}else{
-					var children = context.getElementsByTagName('*');
-				}
-				alert(children.className)
-				//遍历子节点并检查className属性				
-				var elements = [];
-				for (var i = 0; i < children.length; i++) {
-					var child = children[i];
-					var classNames = child.className.split(' ');
-					for (var j = 0; j < classNames.length; j++) {
-						if (classNames[j] == className) {
-							elements[elements.length] = child;
-							break;
-						}
-					}
-				}*/	
-				var elem = document.get.getElementsByClassName(expr);			
-				this.length = 1;
-				this[0] = elem[0];
-				this.context = document;
-				this.selector = expr;
-				return this;		
-			}
-			
 		}
+		
 	});
 	// Populate the class2type map
 	J.each("Boolean Number String Function Array Date RegExp Object".split(" "), function(i, name) {
@@ -346,39 +253,46 @@ var J = (function(ns){
 //extend all
 J.fn.extend({
 	find: function( selector ) {
-		var self = this,
-			i, l;
-		if ( typeof selector !== "string" ) {
-			return J( selector ).filter(function() {
-				for ( i = 0, l = self.length; i < l; i++ ) {
-					if ( J.contains( self[ i ], this ) ) {
-						return true;
-					}
-				}
-			});
-		}
+		var set,
+			that = this,
+			order = [ "ID", "NAME", "TAG" ],
 
-		var ret = this.pushStack( "", "find", selector ),
-			length, n, r;
-		
-		for ( i = 0, l = this.length; i < l; i++ ) {
-			length = ret.length;
-			J.find( selector, this[i], ret );
-			
-			if ( i > 0 ) {
-				// Make sure that the results are unique
-				for ( n = length; n < ret.length; n++ ) {
-					for ( r = 0; r < length; r++ ) {
-						if ( ret[r] === ret[n] ) {
-							ret.splice(n--, 1);
-							break;
-						}
+			match = {
+				ID: /#((?:[\w\u00c0-\uFFFF\-]|\\.)+)/,
+				CLASS: /\.((?:[\w\u00c0-\uFFFF\-]|\\.)+)/,
+				NAME: /\[name=['"]*((?:[\w\u00c0-\uFFFF\-]|\\.)+)['"]*\]/,
+				ATTR: /\[\s*((?:[\w\u00c0-\uFFFF\-]|\\.)+)\s*(?:(\S?=)\s*(?:(['"])(.*?)\3|(#?(?:[\w\u00c0-\uFFFF\-]|\\.)*)|)|)\s*\]/,
+				TAG: /^((?:[\w\u00c0-\uFFFF\*\-]|\\.)+)/,
+				CHILD: /:(only|nth|last|first)-child(?:\(\s*(even|odd|(?:[+\-]?\d+|(?:[+\-]?\d*)?n\s*(?:[+\-]\s*\d+)?))\s*\))?/,
+				POS: /:(nth|eq|gt|lt|first|last|even|odd)(?:\((\d*)\))?(?=[^\-]|$)/,
+				PSEUDO: /:((?:[\w\u00c0-\uFFFF\-]|\\.)+)(?:\((['"]?)((?:\([^\)]+\)|[^\(\)]*)+)\2\))?/
+			};
+				
+		if ( !selector ) {
+			return [];
+		}		
+		if(match.CLASS.test(selector)){
+		// if the selector is tagName				
+			var children = document.getElementsByTagName('*');
+			var elements = new Array();
+			for (var i = 0; i < children.length; i++) {
+				var child = children[i];
+				var classNames = child.className.split(' ');
+				for (var j = 0; j < classNames.length; j++) {						
+					if ("."+classNames[j] == selector) {					
+						this[elements.length] = child;
+						break;
 					}
 				}
 			}
+			return this;
 		}
-
-		return ret;
+		else if(match.TAG.test(selector)){
+			 //if the selector is tagName
+			var elem = document.getElementsByTagName(selector);
+			this[0] = elem[0];
+			return this;
+		}
 	}
 });
 
