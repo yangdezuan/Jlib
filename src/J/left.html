@@ -27,6 +27,11 @@ $(function(){
 			self.find('.elbow_middle').removeClass('elbow_bottom');		
 		}
 	});
+	$('a', J_frameLeftTree).click(function(){
+		var self = $(this);
+		$('a', J_frameLeftTree).removeClass('current');
+		self.addClass('current');
+	});
 	
 	$('div.title', J_frameLeftTree).click(function(e){
 		e.stopPropagation();
@@ -36,7 +41,8 @@ $(function(){
 		self.find('.folder_close').toggleClass('folder_open');		
 		self.find('.plus_bottom').toggleClass('minus_bottom');
 	});
-	//$('div.title:eq(0)', J_frameLeftTree).trigger('click')
+	$('div.title:eq(0)', J_frameLeftTree).trigger('click');
+	$('ul.current li .title', J_frameLeftTree).trigger('click');
 })
 </script>
 </head>
@@ -80,29 +86,99 @@ $(function(){
 					<div>节点操作</div>
 				</div>
 				<ul class="content">
-					<li>
-						<div class="title">
-							<div class="plus_middle"></div>
-							<div class="folder_close"></div>
-							<div>查找</div>
-						</div>
-						<ul class="content">
-							<li class="title">
-								<div class="elbow_middle"></div>
-								<div class="page"></div>
-								<div><a href="j-dom/j-find/JD.php" target="main">J(~)</a></div>
-							</li>	
-							<li class="title">
-								<div class="elbow_middle"></div>
-								<div class="page"></div>
-								<div><a href="j-dom/j-find/JD.php" target="main">J(~).find</a></div>
-							</li>																					
-						</ul>
-					</li>
-					
+					<li class="title">
+						<div class="elbow_middle"></div>
+						<div class="page"></div>
+						<div><a href="j-dom/j-find/JD.php" target="main">J(~)</a></div>
+					</li>	
+					<li class="title">
+						<div class="elbow_middle"></div>
+						<div class="page"></div>
+						<div><a href="j-dom/j-find/JD.php" target="main">J(~).find</a></div>
+					</li>																					
 				</ul>
 			</li>
-
+			<li>
+				<div class="title">
+					<div class="plus_middle"></div>
+					<div class="folder_close"></div>
+					<div>事件操作</div>
+				</div>
+				<ul class="content">
+					<li class="title">
+						<div class="elbow_middle"></div>
+						<div class="page"></div>
+						<div><a href="j-dom/j-find/JD.php" target="main">.bind()</a></div>
+					</li>	
+					<li class="title">
+						<div class="elbow_middle"></div>
+						<div class="page"></div>
+						<div><a href="j-dom/j-find/JD.php" target="main">.delegate()</a></div>
+					</li>																					
+				</ul>
+			</li>
+			<li>
+				<div class="title">
+					<div class="plus_middle"></div>
+					<div class="folder_close"></div>
+					<div>效果</div>
+				</div>
+				<ul class="content">
+					<li class="title">
+						<div class="elbow_middle"></div>
+						<div class="page"></div>
+						<div><a href="j-dom/j-find/JD.php" target="main">.show()</a></div>
+					</li>	
+					<li class="title">
+						<div class="elbow_middle"></div>
+						<div class="page"></div>
+						<div><a href="j-dom/j-find/JD.php" target="main">.animate()</a></div>
+					</li>
+					<li class="title">
+						<div class="elbow_middle"></div>
+						<div class="page"></div>
+						<div><a href="j-dom/j-find/JD.php" target="main">.toggle()</a></div>
+					</li>																					
+				</ul>
+			</li>
+			<li>
+				<div class="title">
+					<div class="plus_middle"></div>
+					<div class="folder_close"></div>
+					<div>Ajax操作</div>
+				</div>
+				<ul class="content">
+					<li class="title">
+						<div class="elbow_middle"></div>
+						<div class="page"></div>
+						<div><a href="j-dom/j-find/JD.php" target="main">.post()</a></div>
+					</li>	
+					<li class="title">
+						<div class="elbow_middle"></div>
+						<div class="page"></div>
+						<div><a href="j-dom/j-find/JD.php" target="main">.get()</a></div>
+					</li>																					
+				</ul>
+			</li>
+			<li>
+				<div class="title">
+					<div class="plus_middle"></div>
+					<div class="folder_close"></div>
+					<div>插件操作</div>
+				</div>
+				<ul class="content">
+					<li class="title">
+						<div class="elbow_middle"></div>
+						<div class="page"></div>
+						<div><a href="j-dom/j-find/JD.php" target="main">.fn()</a></div>
+					</li>	
+					<li class="title">
+						<div class="elbow_middle"></div>
+						<div class="page"></div>
+						<div><a href="j-dom/j-find/JD.php" target="main">.extend</a></div>
+					</li>																					
+				</ul>
+			</li>
 		</ul>
 	</div>
 </body>

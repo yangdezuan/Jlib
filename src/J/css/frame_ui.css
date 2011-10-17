@@ -135,6 +135,9 @@ a:hover {
 	line-height:18px;
 	float:left;
 }
+.frame-leftTree li a.current{
+	color:#f60;
+}
 .frame-leftTree .content:after {
 	content: ".";
 	display: block;
