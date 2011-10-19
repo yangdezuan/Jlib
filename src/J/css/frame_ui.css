@@ -96,6 +96,11 @@ a:hover {
 	font-size:12px;
 	color:#666;
 }
+.frame-header-right .saying img{
+	border:0;
+	width:0;
+	height:0;
+}
 .leftFrame-bg {
 	background:#F2F8FA;
 }
