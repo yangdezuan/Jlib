@@ -337,7 +337,7 @@ J.fn.css = function(name, value) {
 	}else if(typeof name=='object'){
 		for(var key in name){
 			this.css(key,name[key]);
-			//that.style[key]=J.addpx(key,name[key]);
+			that.style[key]=J.addpx(key,name[key]);
 		}
 	}else{
 		if(name.indexOf(':')==-1){//无‘:’,比如'background:red'

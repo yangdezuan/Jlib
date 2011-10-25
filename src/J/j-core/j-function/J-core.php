@@ -72,6 +72,9 @@ $(function(){
 				</pre>
 			</div>
 		</div>
+		<div class="iframeBlog">
+			<iframe src="http://6yang.net/minicomment/index.html" frameborder="0" width="100%" height="550"></iframe>
+		</div>
 	
     </div>
 </div>

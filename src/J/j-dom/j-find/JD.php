@@ -61,6 +61,9 @@ $(function(){
 				</pre>
 				<p> 测试Demo: <a href="../../test/JD.html" target="_blank">JD.html</a></p>
 			</div>
+			<div class="iframeBlog">
+				<iframe src="http://6yang.net/minicomment/index.html" frameborder="0" width="100%" height="550"></iframe>
+			</div>
 		</div>
 	
     </div>

@@ -96,11 +96,6 @@ a:hover {
 	font-size:12px;
 	color:#666;
 }
-.frame-header-right .saying img{
-	border:0;
-	width:0;
-	height:0;
-}
 .leftFrame-bg {
 	background:#F2F8FA;
 }
@@ -151,6 +146,7 @@ a:hover {
 	visibility: hidden;
 }
 .frame-leftTree .content {
+	clear: both;
 	*zoom:1;	
 }
 .frame-leftTree .content.current{
@@ -240,6 +236,11 @@ pre {
     padding: 10px;
 }
 /*container*/
+.iframeBlog{
+	border-top:1px solid #ccc;
+	margin:15px 0 0;
+	padding:5px 0 0;
+}
 #page{
 	padding:15px;
 	line-height:1.5;
