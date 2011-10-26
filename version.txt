@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-1.1.2pre in home develop machine add right.
-=======
-1.1.2pre in home develop machine add left.
->>>>>>> e2ae76c7dcfe5a3c4d29a2f93770a1d2d67de453
+1.1.2pre in home develop machine add right..
