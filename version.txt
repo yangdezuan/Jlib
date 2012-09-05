@@ -1,2 +1,1 @@
-1.1.3pre in home develop machine add right..
-end date : 201205018
+end date : 201208030
