@@ -1,5 +1,3 @@
-# pvp
-完美对战平台
 ### Install
 ```sh
 #如果报错，提示缺少什么
@@ -12,4 +10,4 @@ npm start
 npm run dist
 ```
 ### 任务详细信息
-[iqa](http://www-cn.iqa.com/card/detail/PVP-TASK-2)
+[iqa](http://)
